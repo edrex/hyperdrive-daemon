@@ -8,48 +8,48 @@ If you choose to use FUSE, the Hyperdrive daemon lets your mount Hyperdrives as 
 ❯ hyperdrive fs mount
 Mounted a drive with the following info:
 
-  Mountpoint: /hyperdrive 
+  Mountpoint: /home/foo/Hyperdrive 
   Key:        49c5b9e4ac75a0f0b00ab911975837dd0c8d429512a13413fe2dad768fc9a0f2 
   Seeding:    false
 
-This drive is private by default. To publish it, run `hyperdrive fs publish /hyperdrive` 
+This drive is private by default. To publish it, run `hyperdrive fs publish ~/Hyperdrive` 
 ```
 
 You likely won't want to publish or share your root drive with others, but you can create shareable subdrives using the same command:
 ```
-❯ hyperdrive fs mount /hyperdrive/home/videos
+❯ hyperdrive fs mount ~/Hyperdrive/home/videos
 Mounted a drive with the following info:
 
-  Mountpoint: /hyperdrive/home/videos 
+  Mountpoint: /home/foo/Hyperdrive/home/videos 
   Key:        b432f90b2f817164c32fe5056a06f50c60dc8db946e81331f92e3192f6d4b847 
   Seeding:    false
 
-This drive is private by default. To publish it, run `hyperdrive fs publish /hyperdrive/home/videos` 
+This drive is private by default. To publish it, run `hyperdrive fs publish ~/Hyperdrive/home/videos` 
 ```
 
 Once your drives are mounted, you can treat them as you would any other directory!
 
 Subdrives are private by default (they will not be advertised on the network), but you can make them available with the `fs publish` command:
 ```
-❯ hyperdrive fs publish /hyperdrive/home/videos
-Published the drive mounted at /hyperdrive/home/videos
+❯ hyperdrive fs publish ~/Hyperdrive/home/videos
+Published the drive mounted at ~/Hyperdrive/home/videos
 ```
 
 After publishing, another user can either:
 1. Mount the same subdrive by key within their own root drive
-2. Inspect the drive inside the `/hyperdrive/by-key` directory (can be a symlink target outside the FUSE mount!):
+2. Inspect the drive inside the `~/Hyperdrive/by-key` directory (can be a symlink target outside the FUSE mount!):
 ```
-❯ hyperdrive fs key /hyperdrive/home/videos 
+❯ hyperdrive fs key ~/Hyperdrive/home/videos 
 b432f90b2f817164c32fe5056a06f50c60dc8db946e81331f92e3192f6d4b847
 
-❯ ls /hyperdrive/by-key/b432f90b2f817164c32fe5056a06f50c60dc8db946e81331f92e3192f6d4b847
+❯ ls ~/Hyperdrive/by-key/b432f90b2f817164c32fe5056a06f50c60dc8db946e81331f92e3192f6d4b847
 vid.mkv
 ```
 Or:
 ```
-❯ hyperdrive fs mount /hyperdrive/home/a_friends_videos b432f90b2f817164c32fe5056a06f50c60dc8db946e81331f92e3192f6d4b847
+❯ hyperdrive fs mount ~/Hyperdrive/home/a_friends_videos b432f90b2f817164c32fe5056a06f50c60dc8db946e81331f92e3192f6d4b847
 ...
-❯ ls /hyperdrive/home/a_friends_videos 
+❯ ls ~/Hyperdrive/home/a_friends_videos 
 vid.mkv
 ```
 
@@ -117,9 +117,7 @@ Stop the daemon
 All filesystem-related commands are accessed through the `fs` subcommand. 
 
 #### `hyperdrive fs mount`
-(FUSE) mount hyperdrive FS at `~/Hyperdrive`.
-
-This includes `~/Hyperdrive/home`, your top-level, private Hyperdrive -- Any drives you'd like to share with others must be created by mounting (a Hyperdrive mount, not a FUSE mount) a subdrive under this path. 
+(FUSE) mount hyperdrive FS at `~/Hyperdrive`. This includes `~/Hyperdrive/home`, your top-level, private Hyperdrive -- Any drives you'd like to share with others must be created by mounting (a Hyperdrive mount, not a FUSE mount) a subdrive under this path. 
 
 Your root drive will persist across restarts. You can use it as a replacement for your normal home directory!
 
