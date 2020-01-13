@@ -128,9 +128,11 @@ Newly-created drives are private by default, and can be made available to the ne
 
 - `mountpoint` must be a subdirectory of `/hyperdrive/home`. This command will create a mount within your root Hyperdrive.
 - `key` is an optional drive key. If `key` is specified, it will be advertised on the network by default, and your drive will be read-only.
+#### `hyperdrive fs key <mountpoint>`
+Display the drive key for `<mountpoint>`.
 
 #### `hyperdrive fs publish <mountpoint>`
-Makes a subdrive available to the network. If another user has access to the drive key (in `/hyperdrive/home/<mountpoint>/.key`, then they will only be able to sync the drive after the owner has published it.
+Share the subdrive to other network peers who have the drive key.  
 
 - `mountpoint` must be a subdirectory of `/hyperdrive/home` and must have been previously mounted with the mount subcommand described above.
 
